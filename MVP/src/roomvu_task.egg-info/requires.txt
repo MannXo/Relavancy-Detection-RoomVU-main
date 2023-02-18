@@ -1,0 +1,7 @@
+pandas
+flask
+spacy>=3.0.0
+
+[build]
+vulture
+autopep8

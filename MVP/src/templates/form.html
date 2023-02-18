@@ -1,0 +1,71 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Untitled Form</title>
+	<link rel="stylesheet" type="text/css" href="static/css/view.css" media="all">
+	<script type="text/javascript" src="static/js/view.js"></script>
+
+</head>
+
+<body id="main_body">
+	<div class="row">
+		<div class="column-left" id="form_container">
+			<h1><a>Manual Input</a></h1>
+			<form action="/manual_predict" id="form_33555" class="appnitro" method="post">
+				<div class="form_description">
+					<p>manually input data to do the market impact estimation</p>
+				</div>
+				<ul>
+					<li id="li_1">
+						<label class="description" for="Title">Title </label>
+						<div>
+							<input id="Title" name="Title" class="element text medium" type="text" maxlength="255"
+								value="" />
+						</div>
+					</li>
+					<li id="li_2">
+						<label class="description" for="URL">URL </label>
+						<div>
+							<input id="URL" name="URL" class="element text medium" type="text" maxlength="255"
+								value="" />
+						</div>
+					</li>
+					<li id="li_3">
+						<label class="description" for="Author">Author </label>
+						<div>
+							<input id="Author" name="Author" class="element text medium" type="text" maxlength="255"
+								value="" />
+						</div>
+					</li>
+					<li id="li_4">
+						<label class="description" for="Snippet">Snippet </label>
+						<div>
+							<input id="Snippet" name="Snippet" class="element text medium" type="text" maxlength="255"
+								value="" />
+						</div>
+					</li>
+					<li class="buttons">
+						<input type="hidden" name="form_id" value="33555" />
+						<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+					</li>
+				</ul>
+			</form>
+			<h1>upload training file, *.CSV</h1>
+			<form action="/train" method="post" enctype="multipart/form-data">
+				<input type="file" name="data_file" />
+				<input type="submit" value="upload and train" />
+			</form>
+
+			<h1>upload testing file, *.CSV</h1>
+			<form action="/test" method="post" enctype="multipart/form-data">
+				<input type="file" name="data_file" />
+				<input type="submit" value="upload and test" />
+			</form>
+
+		</div>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+[console_scripts]
+format_check = build.scripts:format_check [build]
+format_fix = build.scripts:format_fix [build]
+imports_check = build.scripts:imports_check [build]
+imports_fix = build.scripts:imports_fix [build]
+lint = build.scripts:lint [build]
+unit_test = build.scripts:unit_test [build]
+

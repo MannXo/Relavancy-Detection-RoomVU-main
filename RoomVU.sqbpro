@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/RoomVU Pilot/RoomVU.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="761"/><column_width id="1" width="0"/><column_width id="2" width="200"/><column_width id="3" width="2338"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/><expanded_item id="4" parent="1"/></tab_structure><tab_browse><current_table name="4,13:maintrain_cleaned"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="train_cleaned" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="90"/><column index="2" value="180"/><column index="3" value="300"/><column index="4" value="300"/><column index="5" value="300"/><column index="6" value="300"/><column index="7" value="120"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sqlb_project&gt;&lt;db path=&quot;D:/RoomVU Pilot/test/RoomVU.db&quot; readonly=&quot;0&quot; foreign_keys=&quot;1&quot; case_sensitive_like=&quot;0&quot; temp_store=&quot;0&quot; wal_autocheckpoint=&quot;1000&quot; synchronous=&quot;2&quot;/&gt;&lt;attached/&gt;&lt;window&gt;&lt;main_tabs open=&quot;structure browser pragmas query&quot; current=&quot;3&quot;/&gt;&lt;/window&gt;&lt;tab_structure&gt;&lt;column_width id=&quot;0&quot; width=&quot;300&quot;/&gt;&lt;column_width id=&quot;1&quot; width=&quot;0&quot;/&gt;&lt;column_width id=&quot;2&quot; width=&quot;200&quot;/&gt;&lt;column_width id=&quot;3&quot; width=&quot;2799&quot;/&gt;&lt;column_width id=&quot;4&quot; width=&quot;0&quot;/&gt;&lt;expanded_item id=&quot;0&quot; parent=&quot;1&quot;/&gt;&lt;expanded_item id=&quot;1&quot; parent=&quot;1&quot;/&gt;&lt;expanded_item id=&quot;2&quot; parent=&quot;1&quot;/&gt;&lt;expanded_item id=&quot;3&quot; parent=&quot;1&quot;/&gt;&lt;expanded_item id=&quot;4&quot; parent=&quot;1&quot;/&gt;&lt;/tab_structure&gt;&lt;tab_browse&gt;&lt;current_table name=&quot;4,4:mainnews&quot;/&gt;&lt;default_encoding codec=&quot;&quot;/&gt;&lt;browse_table_settings&gt;&lt;table schema=&quot;main&quot; name=&quot;news&quot; show_row_id=&quot;0&quot; encoding=&quot;&quot; plot_x_axis=&quot;&quot; unlock_view_pk=&quot;_rowid_&quot;&gt;&lt;sort/&gt;&lt;column_widths&gt;&lt;column index=&quot;1&quot; value=&quot;300&quot;/&gt;&lt;column index=&quot;2&quot; value=&quot;300&quot;/&gt;&lt;column index=&quot;3&quot; value=&quot;300&quot;/&gt;&lt;column index=&quot;4&quot; value=&quot;300&quot;/&gt;&lt;column index=&quot;5&quot; value=&quot;120&quot;/&gt;&lt;/column_widths&gt;&lt;filter_values/&gt;&lt;conditional_formats/&gt;&lt;row_id_formats/&gt;&lt;display_formats/&gt;&lt;hidden_columns/&gt;&lt;plot_y_axes/&gt;&lt;global_filter/&gt;&lt;/table&gt;&lt;/browse_table_settings&gt;&lt;/tab_browse&gt;&lt;tab_sql&gt;&lt;sql name=&quot;SQL 1&quot;&gt;CREATE  TEMPORARY TABLE table1 asCREATE TEMPORARY TABLE table1 as
+select DISTINCT Author,count(*) as cnt_total FROM train_cleaned GROUP by Author;
+
+CREATE TEMPORARY TABLE table2 as
+Select DISTINCT Author,count(*) as cnt from train_cleaned WHERE Related = 0 GROUP by Author;
+
+ CREATE TEMPORARY TABLE table3 as
+select * from table1 inner JOIN table2
+on
+table1.Author = table2.Author
+WHERE cnt = cnt_total;
+
+CREATE TABLE train_cleaned_v2 as
+SELECT * FROM train_cleaned WHERE Author not in
+(SELECT train_cleaned.Author from train_cleaned INNER JOIN
+table3 on train_cleaned.Author = table3.Author);
+
+select *,count(*) from news_cleaned_v1 where related = 0
+
+SELECT sum(cnt) FROM table3;
+
+select * from table2
+drop table table2&lt;/sql&gt;&lt;sql name=&quot;SQL 2&quot;&gt;Select count(*) from news where related = 1&lt;/sql&gt;&lt;current_tab id=&quot;0&quot;/&gt;&lt;/tab_sql&gt;&lt;/sqlb_project&gt;
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

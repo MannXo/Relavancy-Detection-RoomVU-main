@@ -1,0 +1,54 @@
+
+default:
+  cache:
+    paths:
+      - .cache/pip
+  image: python:3.8.5
+services:
+  - docker:19.03.12-dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+  GIT_DEPTH: 0
+  PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
+
+stages:
+  - venv
+  - build
+### stage: venv ###############################################################
+
+venv:
+  artifacts:
+    paths:
+      - venv
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE != "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - source create_venv.sh
+    - env | sort
+  stage: venv
+
+### stage: build ##############################################################
+
+build_and_test:
+  artifacts:
+    name: build_artifacts
+    paths:
+      - src/
+  dependencies:
+    - venv
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE != "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - source enable_venv.sh
+    - lint
+    - pyright
+    - format_check
+    - imports_check
+  stage: build
+  variables:
+    COVERAGE_MIN: 73

@@ -1,0 +1,13 @@
+setup.cfg
+setup.py
+src/build/BuildCommands.py
+src/build/__init__.py
+src/build/constants.py
+src/build/scripts.py
+src/roomvu_task.egg-info/PKG-INFO
+src/roomvu_task.egg-info/SOURCES.txt
+src/roomvu_task.egg-info/dependency_links.txt
+src/roomvu_task.egg-info/entry_points.txt
+src/roomvu_task.egg-info/not-zip-safe
+src/roomvu_task.egg-info/requires.txt
+src/roomvu_task.egg-info/top_level.txt
